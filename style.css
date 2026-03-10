@@ -29,6 +29,7 @@ height:120px;
 border-radius:50%;
 margin:auto;
 margin-bottom:30px;
+animation: pulse 2.5s infinite;
 
 }
 
@@ -54,23 +55,48 @@ opacity:0.5;
 
 }
 
+
+/* 状态颜色 */
+
 .busy{
 
-background:#ef4444;
-box-shadow:0 0 40px #ef4444;
+background: radial-gradient(circle,#ff6b6b,#ef4444);
+box-shadow:0 0 20px #ef4444,0 0 60px #ef4444;
 
 }
 
 .free{
 
-background:#22c55e;
-box-shadow:0 0 40px #22c55e;
+background: radial-gradient(circle,#4ade80,#22c55e);
+box-shadow:0 0 20px #22c55e,0 0 60px #22c55e;
 
 }
 
 .away{
 
-background:#f59e0b;
-box-shadow:0 0 40px #f59e0b;
+background: radial-gradient(circle,#fcd34d,#f59e0b);
+box-shadow:0 0 20px #f59e0b,0 0 60px #f59e0b;
+
+}
+
+
+/* 呼吸动画 */
+
+@keyframes pulse {
+
+0%{
+transform:scale(1);
+filter:brightness(1);
+}
+
+50%{
+transform:scale(1.08);
+filter:brightness(1.2);
+}
+
+100%{
+transform:scale(1);
+filter:brightness(1);
+}
 
 }

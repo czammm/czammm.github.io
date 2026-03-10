@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Status Toggle</title>
+
+<style>
+
+body{
+font-family:Arial;
+text-align:center;
+margin-top:120px;
+background:#111;
+color:white;
+}
+
+button{
+font-size:28px;
+padding:20px 40px;
+margin:20px;
+border:none;
+border-radius:10px;
+cursor:pointer;
+}
+
+.busy{
+background:#ef4444;
+color:white;
+}
+
+.free{
+background:#22c55e;
+color:white;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>Status Switch</h1>
+
+<button class="busy" onclick="setStatus('busy')">Busy</button>
+
+<button class="free" onclick="setStatus('free')">Free</button>
+
+<script>
+
+const repo = "czammm/CanCaiPlay.github.io";
+const file = "status.json";
+
+async function setStatus(state){
+
+const token = prompt("GitHub Token");
+
+const statusData = {
+status: state,
+message: state === "busy" ? "Working" : "Available",
+until: "-"
+};
+
+const res = await fetch(
+`https://api.github.com/repos/${repo}/contents/${file}`
+);
+
+const data = await res.json();
+
+const body = {
+message: "update status",
+content: btoa(JSON.stringify(statusData,null,2)),
+sha: data.sha
+};
+
+await fetch(
+`https://api.github.com/repos/${repo}/contents/${file}`,
+{
+method:"PUT",
+headers:{
+Authorization:"token "+token,
+"Content-Type":"application/json"
+},
+body:JSON.stringify(body)
+}
+);
+
+alert("Status updated");
+
+}
+
+</script>
+
+</body>
+</html>

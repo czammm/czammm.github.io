@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 <meta charset="UTF-8">
 <title>Status</title>
@@ -8,20 +9,27 @@
 
 <body>
 
+<div class="container">
+
 <h1>Current Status</h1>
 
-<div id="status-box">
 <div id="status-light"></div>
+
 <h2 id="status-text">Loading...</h2>
+
 <p id="status-message"></p>
+
 <p id="status-until"></p>
+
+<p class="update">auto refresh: 60s</p>
+
 </div>
 
 <script>
 
 async function loadStatus() {
 
-const res = await fetch("status.json");
+const res = await fetch("status.json?cache=" + Date.now());
 const data = await res.json();
 
 const light = document.getElementById("status-light");
@@ -42,4 +50,5 @@ setInterval(loadStatus, 60000);
 </script>
 
 </body>
+
 </html>
